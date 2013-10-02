@@ -10,6 +10,10 @@ EG: "1.2.3.4/30" => 16909060 , 30
 
 Convert integers to strings
 
+## range-string
+
+Given two integer ips, produce a "0.0.0.0-0.0.0.1" representation
+
 ## parse-cidr, parse-ip 
 
 Convert strings into integers, throwing meaningful cidr-parse-error if
