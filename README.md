@@ -8,6 +8,8 @@ The functions are optimized for speed.
 EG: "1.2.3.4" => 16909060 , 32
 EG: "1.2.3.4/30" => 16909060 , 30
 
+This library was spawned by this paste: http://paste.lisp.org/display/139246
+
 ## cidr-string, ip-string
 
 Convert integers to strings
