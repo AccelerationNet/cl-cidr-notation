@@ -26,4 +26,7 @@
 (define-test range-string
   (assert-equal
    "0.0.1.0-0.0.4.0"
-   (range-string 256 1024)))
+   (range-string 256 1024))
+  (assert-equal
+   "0.0.1.255-0.0.4.128"
+   (range-string 511 1152)))
