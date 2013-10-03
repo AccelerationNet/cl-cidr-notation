@@ -29,22 +29,22 @@ This is probably not super meaningful, but at least gives some benchmarks for th
 CL-CIDR-NOTATION-TEST> (time (loop for i from 0 below (expt 2 32) by (expt 2 8)
                                  do (ip-string i)))
 Evaluation took:
-  4.776 seconds of real time
-  4.764298 seconds of total run time (4.724295 user, 0.040003 system)
-  [ Run times consist of 1.344 seconds GC time, and 3.421 seconds non-GC time. ]
-  99.75% CPU
-  11,908,350,405 processor cycles
-  1,610,611,712 bytes consed
+  2.233 seconds of real time
+  2.216139 seconds of total run time (2.184137 user, 0.032002 system)
+  [ Run times consist of 0.248 seconds GC time, and 1.969 seconds non-GC time. ]
+  99.24% CPU
+  5,568,010,455 processor cycles
+  536,821,744 bytes consed
 
 CL-CIDR-NOTATION-TEST> (time (loop for i from 0 below (expt 2 32) by (expt 2 8)
                                    do (parse-ip (ip-string i))))
 Evaluation took:
-  17.223 seconds of real time
-  17.029064 seconds of total run time (16.961060 user, 0.068004 system)
-  [ Run times consist of 1.380 seconds GC time, and 15.650 seconds non-GC time. ]
-  98.87% CPU
-  42,948,143,182 processor cycles
-  1,610,612,736 bytes consed
+  11.253 seconds of real time
+  11.204700 seconds of total run time (11.040690 user, 0.164010 system)
+  [ Run times consist of 0.416 seconds GC time, and 10.789 seconds non-GC time. ]
+  99.57% CPU
+  28,062,521,077 processor cycles
+  536,866,272 bytes consed
 ```
 
 ## Authors

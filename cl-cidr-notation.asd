@@ -15,7 +15,7 @@
                 :serial t
                 :components ((:file "packages")
                              (:file "cl-cidr-notation"))))
-  :depends-on ())
+  :depends-on (:symbol-munger ))
 
 (defsystem :cl-cidr-notation-test
   :description "Tests for the cl-cidr-notation library"
