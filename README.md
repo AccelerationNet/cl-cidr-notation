@@ -50,6 +50,6 @@ Evaluation took:
 ```
 
 ## Authors
- * Stassats @ #lisp - super optimization work
+ * Stas Boukarev - stassats @ #lisp - super optimization work
  * Russ Tyndall - Acceleration.net
  * Nathan Bird - Acceleration.net

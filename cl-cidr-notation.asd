@@ -24,10 +24,11 @@
   :serial t
   :components ((:module :test
                         :serial t
-                        :components ((:file "cl-cidr-notation"))))
+                        :components ((:file "packages")
+                                     (:file "cl-cidr-notation"))))
   :depends-on (:cl-cidr-notation :lisp-unit))
 
 (defmethod asdf:perform ((o asdf:test-op) (c (eql (find-system :cl-cidr-notation))))
   (asdf:oos 'asdf:load-op :cl-cidr-notation-test)
   (let ((*package* (find-package :cl-cidr-notation-test)))
-    (eval (read-from-string "(run-tests :all)"))))
+    (eval (read-from-string "(run-all-tests)"))))
