@@ -1,6 +1,6 @@
 (in-package :cl-cidr-notation)
 
-(define-condition cidr-parse-error ()
+(define-condition cidr-parse-error (error)
   ((input :accessor input :initarg :input :initform nil)
    (idx :accessor idx :initarg :idx :initform nil)
    (hint :accessor hint :initarg :hint :initform nil))

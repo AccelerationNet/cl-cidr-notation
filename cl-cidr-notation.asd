@@ -26,9 +26,13 @@
                         :serial t
                         :components ((:file "packages")
                                      (:file "cl-cidr-notation"))))
-  :depends-on (:cl-cidr-notation :lisp-unit))
+  :depends-on (:cl-cidr-notation :lisp-unit2))
 
 (defmethod asdf:perform ((o asdf:test-op) (c (eql (find-system :cl-cidr-notation))))
   (asdf:oos 'asdf:load-op :cl-cidr-notation-test)
   (let ((*package* (find-package :cl-cidr-notation-test)))
-    (eval (read-from-string "(run-all-tests)"))))
+    (eval (read-from-string
+           "(lisp-unit2:run-tests
+             :name :cl-cidr-notation
+             :package :cl-cidr-notation-test
+             :run-contexts #'lisp-unit2:with-summary-context)"))))
