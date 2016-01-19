@@ -210,7 +210,7 @@
      sum that into the result"
   (declare (type character c)
            (type (unsigned-byte 8) i)
-           (type simple-string string))
+           (type (or string simple-string) string))
   (flet ((add-part ()
            (when (> part 255)
              (error 'cidr-parse-error
