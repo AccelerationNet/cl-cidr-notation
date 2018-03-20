@@ -1,7 +1,8 @@
-.svn
-build
-dist
 *~
 *#
 *.fasl
 *.pyc
+.svn
+build
+dist
+tags
