@@ -26,7 +26,8 @@
                         :serial t
                         :components ((:file "packages")
                                      (:file "cl-cidr-notation"))))
-  :depends-on (:cl-cidr-notation :lisp-unit2))
+  :depends-on (:cl-cidr-notation
+               :lisp-unit2))
 
 (defmethod asdf:perform ((o asdf:test-op) (c (eql (find-system :cl-cidr-notation))))
   (asdf:oos 'asdf:load-op :cl-cidr-notation-test)
