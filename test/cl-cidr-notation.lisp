@@ -37,3 +37,30 @@
   (assert-equal
    "0.0.1.255-0.0.4.128"
    (range-string 511 1152)))
+
+
+;;; IPv6
+
+(define-test basic-ipv6 ()
+  ;; Loopback address
+  (assert-equal 1 (parse-ipv6 "::1"))
+  ;; Network address
+  (assert-equal "cafe:beef:0000:0000:0000:0000:0000:0000"
+                (ipv6-string
+                  (parse-ipv6 "cafe:beef::")))
+  ;; Regular address
+  (assert-equal "cafe:beef:0000:0000:0000:0000:0000:0001"
+                (ipv6-string
+                  (parse-ipv6 "cafe:beef::1")))
+  ;; Subnet
+  (multiple-value-bind (int prefix)
+    (parse-ipv6-cidr "cafe:beef::/64")
+    (assert-equal "cafe:beef:0000:0000:0000:0000:0000:0000"
+                  (ipv6-string int))
+    (assert-equal 64 prefix))
+  ;; Interface address
+  (multiple-value-bind (int prefix)
+    (parse-ipv6-cidr "cafe:beef::1")
+    (assert-equal "cafe:beef:0000:0000:0000:0000:0000:0001"
+                  (ipv6-string int))
+    (assert-equal 128 prefix)))

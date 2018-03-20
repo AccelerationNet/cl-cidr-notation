@@ -2,6 +2,12 @@
   (:use #:cl-user #:cl)
   (:export
    #:cidr-parse-error
-   #:ip-string #:cidr-string #:range-string
-   #:parse-ip #:parse-cidr
-   #:valid-cidr? ))
+   #:cidr-string
+   #:ip-string
+   #:ipv6-string
+   #:parse-cidr
+   #:parse-ipv6-cidr
+   #:parse-ip
+   #:parse-ipv6
+   #:range-string
+   #:valid-cidr?))

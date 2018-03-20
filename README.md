@@ -1,31 +1,32 @@
 # cl-cidr-notation
 
-A Common Lisp library for converting ip addresses and CIDR blocks
-from integer to string representations and vice versa
+A Common Lisp library for converting IP addresses and CIDR blocks from integer to string representations, and vice versa.
 
-The functions are optimized for speed.
+The IPv4 functions are optimized for speed.
 
-EG: "1.2.3.4" => 16909060 , 32
-EG: "1.2.3.4/30" => 16909060 , 30
+EG:
+"1.2.3.4" => 16909060, 32
+"1.2.3.4/30" => 16909060 , 30
+"::1" => 1, 128
+"cafe:beef::/64" => 269826771143976387270773007078999982080, 64
 
 This library was spawned by this paste: http://paste.lisp.org/display/139246
 
-## cidr-string, ip-string
+## cidr-string, ip-string, ipv6-string
 
-Convert integers to strings
+Convert integers to strings.
 
 ## range-string
 
-Given two integer ips, produce a "0.0.0.0-0.0.0.1" representation
+Given two integer IPv4 addresses, produce a "0.0.0.0-0.0.0.1" representation.
 
-## parse-cidr, parse-ip 
+## parse-cidr, parse-ip, parse-ipv6-cidr, parse-ipv6
 
-Convert strings into integers, throwing meaningful cidr-parse-error if
-it fails
+Convert strings into integers, throwing meaningful cidr-parse-error on failure.
 
 
-## Speed Results
-This is probably not super meaningful, but at least gives some benchmarks for the current speeds Im seeing
+## Speed Results for IPv4 conversions
+This is probably not super meaningful, but at least gives some benchmarks for the current speeds I'm seeing
 
 ```
 CL-CIDR-NOTATION-TEST> (time (loop for i from 0 below (expt 2 32) by (expt 2 8)
@@ -53,3 +54,4 @@ Evaluation took:
  * Stas Boukarev - stassats @ #lisp - super optimization work
  * Russ Tyndall - Acceleration.net
  * Nathan Bird - Acceleration.net
+ * James Fleming - james@electronic-quill.net - unoptimised IPv6 additions
