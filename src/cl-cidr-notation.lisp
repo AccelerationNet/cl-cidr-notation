@@ -195,31 +195,33 @@
   (declare (type (unsigned-byte 32) int-address))
   (cidr-string int-address))
 
-(defun parse-cidr (string &key (validate? t)
+(defun parse-cidr (cidr-string &key (validate? t)
                    &aux
-                   (i (length string))
+                   (i (length cidr-string))
                    (first-idx (- i 1))
-                   (pow 0) (sum 0) (part 0) (tri 0)
-                   (c #\0) (fixed 32))
+                   (pow 0)
+                   (sum 0)
+                   (part 0)
+                   (tri 0)
+                   (c #\0)
+                   (fixed 32))
   "Speedy ip-address / CIDR parser
-
-   summary:
-     we are going backwards down the string reading each number and summing it
-
-     when we finish a triplet we shift that into the triplet number's byte and
+   Summary:
+     we are going backwards down the string, reading each number and summing it.
+     When we finish a triplet, we shift that into the triplet number's byte and
      sum that into the result"
   (declare (type character c)
            (type (unsigned-byte 8) i)
-           (type (or string simple-string) string))
+           (type (or string simple-string) cidr-string))
   (flet ((add-part ()
            (when (> part 255)
              (error 'cidr-parse-error
-                    :input string
+                    :input cidr-string
                     :idx i
                     :hint "Contained a triplet larger than 255"))
            (when (> tri 3)
              (error 'cidr-parse-error
-                    :input string
+                    :input cidr-string
                     :idx i
                     :hint "Contained too many triplets"))
            (incf sum (ash part (* tri 8)))))
@@ -228,7 +230,7 @@
       while (plusp i)
       do (progn
            (decf i)
-           (setf c (char string i))
+           (setf c (char cidr-string i))
            (cond
              ((char<= #\0 c #\9)
               (incf part (* (- (char-code c) 48)
@@ -241,28 +243,29 @@
              ((char= #\/ c)
               (when (= first-idx i)
                 (error 'cidr-parse-error
-                       :input string
+                       :input cidr-string
                        :idx i
                        :hint "IP Cannot end in /"))
               (setf fixed part
                     part 0
                     pow 0))
              (t (error 'cidr-parse-error
-                       :input string
+                       :input cidr-string
                        :idx i
                        :hint "Contained an invalid character")))))
     (add-part))
   (unless (<= 0 fixed 32)
     (error 'cidr-parse-error
-           :input string
+           :input cidr-string
            :idx i
            :hint "has an invalid prefix-size/mask/fixed-bits"))
   (when (and (/= fixed 32) ;; single IPs cannot be invalid
-             validate? (not (valid-cidr? sum fixed)))
+             validate?
+             (not (valid-cidr? sum fixed)))
     (error 'cidr-parse-error
-           :input string
+           :input cidr-string
            :idx i
-           :hint "Parsed but was an invalid CIDR address either the range started at the wrong place"))
+           :hint "Parsed but was an invalid CIDR address. The range may have started at the wrong place"))
   (values sum fixed))
 
 (defun parse-ip (input)
